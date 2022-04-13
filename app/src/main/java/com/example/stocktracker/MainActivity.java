@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(List<Stock> tasks) {
-                super.onPostExecute(tasks);
+            protected void onPostExecute(List<Stock> stocks) {
+                super.onPostExecute(stocks);
+                StocksAdapter adapter = new StocksAdapter(MainActivity.this, stocks);
+                recyclerView.setAdapter(adapter);
                 //TasksAdapter adapter = new TasksAdapter(MainActivity.this, tasks);
                 //recyclerView.setAdapter(adapter);
             }
