@@ -21,11 +21,11 @@ public class Stock {
     @ColumnInfo(name = "currency")
     private String currency;
 
-    @ColumnInfo(name = "currency_value")
-    private Double currencyValue;
+    @ColumnInfo(name = "currency_conversion_rate")
+    private Double currencyConversionRate;
 
-    @ColumnInfo(name = "value")
-    private Double value;
+    @ColumnInfo(name = "price_per_stock")
+    private Double pricePerStock;
 
     @ColumnInfo(name = "quantity")
     private int quantity;
@@ -49,17 +49,29 @@ public class Stock {
 
     public void setCurrency(String currency) { this.currency = currency; }
 
-    public Double getCurrencyValue() { return currencyValue; }
+    public Double getCurrencyConversionRate() { return currencyConversionRate; }
 
-    public void setCurrencyValue(Double currencyValue) { this.currencyValue = currencyValue; }
+    public void setCurrencyConversionRate(Double currencyConversionRate) { this.currencyConversionRate = currencyConversionRate; }
 
-    public Double getValue() { return value; }
+    public Double getPricePerStock() { return pricePerStock; }
 
-    public void setValue(Double value) { this.value = value; }
+    public void setPricePerStock(Double pricePerStock) { this.pricePerStock = pricePerStock; }
 
     public int getQuantity() { return quantity; }
 
-    public void setQuantity(int currencyValue) { this.quantity = quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+
+    public static Stock populateData() {
+        Stock stock = new Stock();
+        stock.setName("Apple");
+        stock.setSymbol("AAPL");
+        stock.setCurrency("USD");
+        stock.setCurrencyConversionRate(0.95);
+        stock.setPricePerStock(170.60);
+        stock.setQuantity(55);
+        return stock;
+    }
 
 
 

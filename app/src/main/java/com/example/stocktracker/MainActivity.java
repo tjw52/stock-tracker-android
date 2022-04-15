@@ -28,10 +28,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview_stocks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+
         buttonAddStock = findViewById(R.id.floating_button_add);
         buttonAddStock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UpdateStockActivity.class);
+                startActivity(intent);
                 /*
                 Intent intent = new Intent(MainActivity.this, AddStockActivity.class);
                 startActivity(intent);
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // getStocks();
+        getStocks();
 
     }
 
@@ -65,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 //recyclerView.setAdapter(adapter);
             }
         }
+
+        GetStocks gs = new GetStocks();
+        gs.execute();
     }
 
 

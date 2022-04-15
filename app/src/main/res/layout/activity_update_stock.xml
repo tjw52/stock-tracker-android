@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateStockActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Update stock"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stock name" />
+
+        <EditText
+            android:id="@+id/editTextSymbol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Symbol (e.g. AAPL)" />
+
+        <EditText
+            android:id="@+id/editTextCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Currency" />
+
+        <EditText
+            android:id="@+id/editTextCurrencyConversionRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Conversion rate"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editTextPricePerStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price per stock"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/editTextQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantity"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/textViewTotalValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Total value"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="Save"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</RelativeLayout>

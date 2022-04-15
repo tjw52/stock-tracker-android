@@ -31,24 +31,19 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
     public void onBindViewHolder(StocksViewHolder holder, int position) {
         Stock t = stockList.get(position);
         holder.textViewName.setText(t.getName());
-        holder.textViewQty.setText(t.getQuantity());
-        String total = t.getValue().toString();
-        holder.textViewTotal.setText(total);
+        holder.textViewQty.setText(Integer.toString(t.getQuantity()));
 
-        /*
-        if (t.isFinished())
-            holder.textViewStatus.setText("Completed");
-        else
-            holder.textViewStatus.setText("Not Completed");
-        */
+        holder.textViewTotal.setText("2500 CHF");
+        //String total = t.getValue().toString();
+        //holder.textViewTotal.setText(total);
+
+
     }
 
     @Override
     public int getItemCount() {
         return stockList.size();
     }
-
-
 
     class StocksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
