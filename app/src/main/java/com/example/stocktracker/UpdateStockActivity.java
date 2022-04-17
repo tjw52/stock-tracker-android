@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UpdateStockActivity extends AppCompatActivity {
 
-    private EditText editTextName, editTextSymbol, editTextCurrency, editTextCurrencyConversionRate, editTextPricePerStock, editTextQuantity;
+    private EditText editTextName, editTextSymbol, editTextCurrencyConversionRate, editTextPricePerStock, editTextQuantity;
+    private Spinner spCurrencies;
     private TextView tvTotalValue;
 
     @Override
@@ -21,7 +23,8 @@ public class UpdateStockActivity extends AppCompatActivity {
 
         editTextName = findViewById(R.id.editTextName);
         editTextSymbol = findViewById(R.id.editTextSymbol);
-        editTextCurrency = findViewById(R.id.editTextCurrency);
+        //editTextCurrency = findViewById(R.id.editTextCurrency);
+        spCurrencies = findViewById(R.id.spCurrencies);
         editTextCurrencyConversionRate = findViewById(R.id.editTextCurrencyConversionRate);
         editTextPricePerStock = findViewById(R.id.editTextPricePerStock);
         editTextQuantity = findViewById(R.id.editTextQuantity);
@@ -40,7 +43,8 @@ public class UpdateStockActivity extends AppCompatActivity {
     private void saveStock() {
         final String sName = editTextName.getText().toString().trim();
         final String sSymbol = editTextSymbol.getText().toString().trim();
-        final String sCurrency = editTextCurrency.getText().toString().trim();
+        //final String sCurrency = editTextCurrency.getText().toString().trim();
+        final String sCurrency = spCurrencies.getSelectedItem().toString();
 
         final String sCurrencyValue = editTextCurrencyConversionRate.getText().toString().trim();
         final Double dCurrencyValue;
@@ -51,25 +55,25 @@ public class UpdateStockActivity extends AppCompatActivity {
 
         // Validate fields
         if (sName.isEmpty()) {
-            editTextName.setError("Task required");
+            editTextName.setError("Name required");
             editTextName.requestFocus();
             return;
         }
 
         if (sSymbol.isEmpty()) {
-            editTextSymbol.setError("Desc required");
+            editTextSymbol.setError("Symbol required");
             editTextSymbol.requestFocus();
             return;
         }
 
         if (sCurrency.isEmpty()) {
-            editTextCurrency.setError("Desc required");
-            editTextCurrency.requestFocus();
+            //spCurrencies.setError("Currency required");
+            spCurrencies.requestFocus();
             return;
         }
 
         if (sCurrencyValue.isEmpty()) {
-            editTextCurrencyConversionRate.setError("Desc required");
+            editTextCurrencyConversionRate.setError("Conversion rate required");
             editTextCurrencyConversionRate.requestFocus();
             return;
         } else {
@@ -77,7 +81,7 @@ public class UpdateStockActivity extends AppCompatActivity {
         }
 
         if (sValue.isEmpty()) {
-            editTextPricePerStock.setError("Desc required");
+            editTextPricePerStock.setError("Price per stock required");
             editTextPricePerStock.requestFocus();
             return;
         } else {
@@ -85,7 +89,7 @@ public class UpdateStockActivity extends AppCompatActivity {
         }
 
         if (sQuantity.isEmpty()) {
-            editTextQuantity.setError("Desc required");
+            editTextQuantity.setError("Quantity required");
             editTextQuantity.requestFocus();
             return;
         } else {

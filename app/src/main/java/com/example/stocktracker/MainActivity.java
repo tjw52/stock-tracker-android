@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.content.Intent;
@@ -45,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         getStocks();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getStocks();
+        Log.d("lifecycle", "onResume invoked");
     }
 
     private void getStocks() {
