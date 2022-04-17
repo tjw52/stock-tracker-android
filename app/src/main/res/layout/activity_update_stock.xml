@@ -66,53 +66,6 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tvTextCurrency"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".40"
-                android:text="Currency:"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-            <Spinner
-                android:id="@+id/spCurrencies"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight=".60"
-                android:entries="@array/currencies" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tvTextCurrencyConversionRate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".40"
-                android:text="Currency rate:"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-            <EditText
-                android:id="@+id/editTextCurrencyConversionRate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="0.95"
-                android:layout_weight=".60"
-                android:inputType="numberDecimal" />
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -159,13 +112,81 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewTotalValue"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTextCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".40"
+                android:text="Currency:"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <Spinner
+                android:id="@+id/spCurrencies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".60"
+                android:layout_gravity="center_vertical"
+                android:entries="@array/currencies" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTextCurrencyConversionRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".40"
+                android:text="Currency rate:"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <EditText
+                android:id="@+id/editTextCurrencyConversionRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="0.95"
+                android:layout_weight=".60"
+                android:inputType="numberDecimal" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Total value: -"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/tvTextTotalValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".40"
+                android:text="Total:"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/textViewTotalValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".60"
+                android:text="-"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        </LinearLayout>
+
+
 
         <Button
             android:id="@+id/button_save"

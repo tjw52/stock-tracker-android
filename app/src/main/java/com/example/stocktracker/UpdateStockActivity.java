@@ -4,8 +4,11 @@ import static java.sql.DriverManager.println;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,7 +38,6 @@ public class UpdateStockActivity extends AppCompatActivity {
         tvTotalValue = findViewById(R.id.textViewTotalValue);
 
         final Stock stock = (Stock) getIntent().getSerializableExtra("stock");
-        Log.d("lifecycle", "onCreate: " + stock);
 
         // If stock equals null then a new stock is created in the activity, otherwise a stock is being updated
         if (stock == null) {
@@ -45,6 +47,7 @@ public class UpdateStockActivity extends AppCompatActivity {
             loadStock(stock);
         }
 
+        // On save button clicked
         findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +60,77 @@ public class UpdateStockActivity extends AppCompatActivity {
             }
         });
 
+        // Update total value textView on change of price per stock
+        editTextPricePerStock.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                setTvTotalValue();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        // Update total value textView on change of quantity
+        editTextQuantity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                setTvTotalValue();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        spCurrencies.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setTvTotalValue();
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
+
+    }
+
+    // Calculates total value and updates UI
+    private void setTvTotalValue() {
+        final String sValue = editTextPricePerStock.getText().toString().trim();
+        final Double dValue;
+        final String sQuantity = editTextQuantity.getText().toString().trim();
+        final int iQuantity;
+
+        if (sValue.isEmpty()) {
+            tvTotalValue.setText("-");
+            return;
+        } else {
+            dValue = Double.parseDouble(sValue);
+        }
+
+        if (sQuantity.isEmpty()) {
+            tvTotalValue.setText("-");
+            return;
+        } else {
+            iQuantity = Integer.parseInt(sQuantity);
+        }
+        Double value = dValue * iQuantity;
+        tvTotalValue.setText(String.valueOf(value) + " " + spCurrencies.getSelectedItem().toString());
     }
 
     private void loadStock(Stock stock) {
