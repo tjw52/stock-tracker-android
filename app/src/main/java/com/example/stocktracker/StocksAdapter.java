@@ -16,9 +16,9 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
     private Context mCtx;
     private List<Stock> stockList;
 
-    public StocksAdapter(Context mCtx, List<Stock> taskList) {
+    public StocksAdapter(Context mCtx, List<Stock> stockList) {
         this.mCtx = mCtx;
-        this.stockList = taskList;
+        this.stockList = stockList;
     }
 
     @Override
@@ -62,6 +62,11 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
         @Override
         public void onClick(View view) {
             Stock stock = stockList.get(getAdapterPosition());
+
+            Intent intent = new Intent(mCtx, UpdateStockActivity.class);
+            intent.putExtra("stock", stock);
+
+            mCtx.startActivity(intent);
 
             /*Intent intent = new Intent(mCtx, UpdateStockActivity.class);
             intent.putExtra("stock", stock);

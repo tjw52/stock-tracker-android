@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getStocks();
-        Log.d("lifecycle", "onResume invoked");
     }
 
     private void getStocks() {
