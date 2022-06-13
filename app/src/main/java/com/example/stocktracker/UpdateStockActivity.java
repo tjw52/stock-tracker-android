@@ -2,6 +2,7 @@ package com.example.stocktracker;
 
 import static java.sql.DriverManager.println;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,11 +10,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UpdateStockActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class UpdateStockActivity extends AppCompatActivity {
     private EditText editTextName, editTextSymbol, editTextCurrencyConversionRate, editTextPricePerStock, editTextQuantity;
     private Spinner spCurrencies;
     private TextView tvTitle, tvTotalValue;
+    private Button btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +40,18 @@ public class UpdateStockActivity extends AppCompatActivity {
         editTextQuantity = findViewById(R.id.editTextQuantity);
         tvTitle = findViewById(R.id.textViewTitle);
         tvTotalValue = findViewById(R.id.textViewTotalValue);
+        btnDelete = findViewById(R.id.button_delete);
+
 
         final Stock stock = (Stock) getIntent().getSerializableExtra("stock");
 
         // If stock equals null then a new stock is created in the activity, otherwise a stock is being updated
         if (stock == null) {
             tvTitle.setText("Create stock");
+            btnDelete.setVisibility(View.INVISIBLE);
         } else {
             tvTitle.setText("Update stock");
+            btnDelete.setVisibility(View.VISIBLE);
             loadStock(stock);
         }
 
@@ -51,12 +59,35 @@ public class UpdateStockActivity extends AppCompatActivity {
         findViewById(R.id.button_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
                 if (stock == null) {
                     saveStock();
                 } else {
                     updateStock(stock);
                 }
+            }
+        });
+
+        // On delete button clicked
+        findViewById(R.id.button_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateStockActivity.this);
+                builder.setTitle("Are you sure?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteStock(stock);
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+
+                AlertDialog ad = builder.create();
+                ad.show();
             }
         });
 
@@ -222,6 +253,28 @@ public class UpdateStockActivity extends AppCompatActivity {
             ss.execute();
         }
 
+    }
+
+    private void deleteStock(final Stock stock) {
+        class DeleteStock extends AsyncTask<Void, Void, Void> {
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .stockDao()
+                        .delete(stock);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                finish();
+                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_LONG).show();
+            }
+        }
+        DeleteStock ds = new DeleteStock();
+        ds.execute();
     }
 
     private boolean stockIsValid() {

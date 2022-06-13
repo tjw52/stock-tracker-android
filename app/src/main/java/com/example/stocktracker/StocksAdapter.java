@@ -29,15 +29,17 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
 
     @Override
     public void onBindViewHolder(StocksViewHolder holder, int position) {
-        Stock t = stockList.get(position);
-        holder.textViewName.setText(t.getName());
-        holder.textViewQty.setText(Integer.toString(t.getQuantity()));
+        Stock stock = stockList.get(position);
+        holder.textViewName.setText(stock.getName());
+        holder.textViewSymbol.setText(stock.getSymbol());
+        holder.textViewQty.setText("Quantity: " + Integer.toString(stock.getQuantity()));
+        holder.textViewPrice.setText("Rate: " + Double.toString(stock.getPricePerStock()) + " " + stock.getCurrency());
 
-        holder.textViewTotal.setText("2500 CHF");
+        Double total = stock.getQuantity() * stock.getPricePerStock();
+        total = total * stock.getCurrencyConversionRate();
+        holder.textViewTotal.setText(Double.toString(total) + " CHF");
         //String total = t.getValue().toString();
         //holder.textViewTotal.setText(total);
-
-
     }
 
     @Override
@@ -47,13 +49,15 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
 
     class StocksViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView textViewName, textViewQty, textViewTotal;
+        TextView textViewName, textViewSymbol, textViewQty, textViewPrice, textViewTotal;
 
         public StocksViewHolder(View itemView) {
             super(itemView);
 
             textViewName = itemView.findViewById(R.id.textViewName);
+            textViewSymbol = itemView.findViewById(R.id.textViewSymbol);
             textViewQty = itemView.findViewById(R.id.textViewQty);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
             textViewTotal = itemView.findViewById(R.id.textViewTotal);
 
             itemView.setOnClickListener(this);
@@ -73,6 +77,8 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
 
             mCtx.startActivity(intent);*/
         }
+
+
 
     }
 

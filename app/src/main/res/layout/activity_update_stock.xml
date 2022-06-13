@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".UpdateStockActivity">
 
+    <include
+        android:id="@+id/tbShare"
+        layout="@layout/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,38 +27,38 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tvTextName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Stock name:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="0dp"
-                android:layout_weight=".60"
                 android:layout_height="wrap_content"
+                android:layout_weight=".60"
                 android:hint="Apple" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tvTextSymbol"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Stock symbol:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <EditText
@@ -74,18 +78,18 @@
                 android:id="@+id/tvTextPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Price per stock:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <EditText
                 android:id="@+id/editTextPricePerStock"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="170.50"
                 android:layout_weight=".60"
-                android:inputType="numberDecimal"/>
+                android:hint="170.50"
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 
@@ -97,9 +101,9 @@
                 android:id="@+id/tvTextQuantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Quantity:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <EditText
@@ -108,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".60"
                 android:hint="35"
-                android:inputType="number"/>
+                android:inputType="number" />
 
         </LinearLayout>
 
@@ -121,17 +125,17 @@
                 android:id="@+id/tvTextCurrency"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Currency:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <Spinner
                 android:id="@+id/spCurrencies"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".60"
                 android:layout_gravity="center_vertical"
+                android:layout_weight=".60"
                 android:entries="@array/currencies" />
 
         </LinearLayout>
@@ -144,17 +148,17 @@
                 android:id="@+id/tvTextCurrencyConversionRate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Currency rate:"
-                android:layout_gravity="center_vertical"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <EditText
                 android:id="@+id/editTextCurrencyConversionRate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="0.95"
                 android:layout_weight=".60"
+                android:hint="0.95"
                 android:inputType="numberDecimal" />
 
         </LinearLayout>
@@ -162,30 +166,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tvTextTotalValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".40"
                 android:text="Total:"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewTotalValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight=".60"
                 android:text="-"
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
 
         </LinearLayout>
-
 
 
         <Button
@@ -195,6 +198,16 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:text="Save"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/red"
+            android:text="Delete"
             android:textAllCaps="false" />
 
     </LinearLayout>
