@@ -3,11 +3,15 @@ package com.example.stocktracker;
 import static java.sql.DriverManager.println;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +22,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 
 public class UpdateStockActivity extends AppCompatActivity {
 
@@ -41,6 +48,10 @@ public class UpdateStockActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.textViewTitle);
         tvTotalValue = findViewById(R.id.textViewTotalValue);
         btnDelete = findViewById(R.id.button_delete);
+
+        Toolbar toolbar = findViewById(R.id.tbShare);
+        toolbar.setTitle("Stock Tracker");
+        setSupportActionBar(toolbar);
 
 
         final Stock stock = (Stock) getIntent().getSerializableExtra("stock");
@@ -138,6 +149,35 @@ public class UpdateStockActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        // Locate MenuItem with ShareActionProvider
+        MenuItem menuItem = menu.findItem(R.id.mnuShare);
+        // Return true to display menu
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (this.stockIsValid()) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+
+            final String sName = editTextName.getText().toString().trim();
+            final String sSymbol = editTextSymbol.getText().toString().trim();
+            final String txt = "I recommend you to look at the following Stock:\n" + sName + " (" + sSymbol + ")\n\nSent from the Stock Tracker App, available on Android.";
+
+            sendIntent.putExtra(Intent.EXTRA_TEXT, txt);
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+        }
+
+        return true;
     }
 
     // Calculates total value and updates UI
