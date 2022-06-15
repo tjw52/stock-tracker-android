@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface StockDao {
 
-    @Query("SELECT * FROM stock")
+    @Query("SELECT * FROM stock ORDER BY name")
     List<Stock> getAll();
 
     @Insert
