@@ -37,7 +37,8 @@ public class StocksAdapter extends RecyclerView.Adapter<StocksAdapter.StocksView
 
         Double total = stock.getQuantity() * stock.getPricePerStock();
         total = total * stock.getCurrencyConversionRate();
-        holder.textViewTotal.setText(Double.toString(total) + " CHF");
+        String chfTotalStr = Double.toString(total).format("%.2f", total) + " CHF";
+        holder.textViewTotal.setText(chfTotalStr);
         //String total = t.getValue().toString();
         //holder.textViewTotal.setText(total);
     }
